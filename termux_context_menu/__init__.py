@@ -11,7 +11,7 @@ BUTTONS: tuple[Button, ...] = (
     Button("Open on PC", id="to-pc"),
 )
 SERVER = SimpleNamespace(
-        addr="http://192.168.0.22:23325",
+    addr="http://192.168.0.22:23325",
     token="rT3ktWBG7CLmD-xwGJkUuQSzfBKaRYu0oljzlpv8j5o"
 )
 
