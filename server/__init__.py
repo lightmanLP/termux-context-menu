@@ -29,7 +29,6 @@ async def create_token() -> str:
 async def check(request: web.Request):
     try:
         token = request.headers["Authorization"]
-        print(token)
         assert " " not in token
         async with db.execute("SELECT * FROM tokens WHERE token = ?", (token, )) as cur:
             async for row in cur:
