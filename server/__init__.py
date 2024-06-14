@@ -23,6 +23,7 @@ async def init():
 async def create_token() -> str:
     token = secrets.token_urlsafe(TOKEN_SIZE)
     await db.execute("INSERT INTO tokens VALUES (?)", (token, ))
+    await db.commit()
     return token
 
 
