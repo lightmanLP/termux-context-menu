@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "termux-context-menu"
+version = "0.0.1"
+description = ""
+authors = ["lightmanLP <liteman1000@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+textual = "^0.67.1"
+requests = "^2.32.3"
+
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+
+
+[tool.poetry.group.server]
+optional = true
+
+[tool.poetry.group.server.dependencies]
+aiohttp = "^3.9.5"
+aiosqlite = "^0.20.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
