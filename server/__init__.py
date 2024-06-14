@@ -17,7 +17,7 @@ async def init():
     global db
 
     db = await aiosqlite.connect("server.db")
-    await db.execute("CREATE TABLE IF NOT EXISTS tokens (text token PRIMARY KEY)")
+    await db.execute("CREATE TABLE IF NOT EXISTS tokens (token TEXT PRIMARY KEY)")
 
 
 async def create_token() -> str:
@@ -28,9 +28,10 @@ async def create_token() -> str:
 
 async def check(request: web.Request):
     try:
-        token = request.headers["Authorzation"]
+        token = request.headers["Authorization"]
+        print(token)
         assert " " not in token
-        async with db.execute("SELECT * FROM tokens WHERE token = ?", token) as cur:
+        async with db.execute("SELECT * FROM tokens WHERE token = ?", (token, )) as cur:
             async for row in cur:
                 break
             else:
@@ -39,7 +40,7 @@ async def check(request: web.Request):
         raise web.HTTPUnauthorized()
 
 
-@routes.get("/open-url")
+@routes.post("/open-url")
 async def hello(request: web.Request) -> web.Response:
     await check(request)
     data = await request.json()
@@ -52,6 +53,7 @@ async def run():
     await runner.setup()
     site = web.TCPSite(
         runner,
+        host="0.0.0.0",
         port=PORT
     )
     await site.start()

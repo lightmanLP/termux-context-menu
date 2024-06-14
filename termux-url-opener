@@ -1,1 +1,1 @@
-python3 -m termux_context_menu $url
+python3 -m termux_context_menu $@

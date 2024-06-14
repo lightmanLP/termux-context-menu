@@ -11,7 +11,7 @@ BUTTONS: tuple[Button, ...] = (
     Button("Open on PC", id="to-pc"),
 )
 SERVER = SimpleNamespace(
-    addr="192.168.0.22:23325",
+        addr="http://192.168.0.22:23325",
     token="rT3ktWBG7CLmD-xwGJkUuQSzfBKaRYu0oljzlpv8j5o"
 )
 
@@ -44,7 +44,7 @@ class MenuApp(App):
 
     @on(Button.Pressed, "#to-pc")
     def but_to_pc(self):
-        request("open-url", {"url": sys.argv[1]})
+        request("/open-url", {"url": sys.argv[-1]})
 
     @on(Button.Pressed, ".main-button")
     def after_selection(self):
